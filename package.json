@@ -1,0 +1,34 @@
+{
+    "name": "vite-plugin-clean",
+    "version": "0.0.2",
+    "description": "",
+    "main": "dist/vite-plugin-clean.umd.js",
+    "module": "dist/vite-plugin-clean.es.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+    "scripts": {
+        "build": "vite build"
+    },
+    "files": [
+        "dist/*"
+    ],
+    "keywords": [
+        "vite",
+        "build",
+        "plugin",
+        "clean"
+    ],
+    "author": "于智勇｜15684187702@163.com",
+    "license": "ISC",
+    "dependencies": {
+        "typescript": "^5.5.4",
+        "vite": "^5.3.4"
+    },
+    "devDependencies": {
+        "@types/node": "^20.14.11",
+        "chalk": "^5.3.0",
+        "path": "^0.12.7",
+        "rollup-plugin-polyfill-node": "^0.13.0",
+        "vite-plugin-dts": "4.0.0-beta.1"
+    }
+}
