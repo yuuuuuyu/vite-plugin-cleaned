@@ -4,12 +4,10 @@ import path from "path"
 import dts from "vite-plugin-dts"
 import vitePluginClean from "./src/index"
 
-import chalk from "chalk" // 确保在这里导入到了 chalk
-console.log("Chalk version:", chalk) // 调试输出
 export default defineConfig({
   plugins: [
     vitePluginClean({
-      folder: "222",
+      folder: "dist",
     }),
     dts({
       entryRoot: "src",
@@ -25,10 +23,11 @@ export default defineConfig({
     },
     rollupOptions: {
       plugins: [polyfillNode()],
-      external: ["fs/promises"],
+      external: ["fs/promises", "ora"],
       output: {
         globals: {
           "fs/promises": "fs/promises",
+          ora: "ora",
         },
         exports: "named",
       },
