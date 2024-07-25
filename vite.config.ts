@@ -1,10 +1,14 @@
 import { defineConfig } from "vite"
-import polyfillNode from "rollup-plugin-polyfill-node"
 import path from "path"
 import dts from "vite-plugin-dts"
 import vitePluginClean from "./src/index"
 
+import { nodePolyfills } from "vite-plugin-node-polyfills"
+
 export default defineConfig({
+  //   optimizeDeps: {
+  //     include: ["fs-extra", "ora", "path"],
+  //   },
   plugins: [
     vitePluginClean({
       folder: "dist",
@@ -14,20 +18,21 @@ export default defineConfig({
       outputDir: "dist/types",
       tsConfigFilePath: "./tsconfig.json",
     }),
+    nodePolyfills(),
   ],
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "VitePluginClean",
-      fileName: format => `vite-plugin-clean.${format}.js`,
+      name: "VitePluginCleaned",
+      fileName: format => `vite-plugin-cleaned.${format}.js`,
     },
     rollupOptions: {
-      plugins: [polyfillNode()],
-      external: ["fs/promises", "ora"],
+      external: ["fs-extra", "ora", "chalk"],
       output: {
         globals: {
-          "fs/promises": "fs/promises",
+          "fs-extra": "fs-extra",
           ora: "ora",
+          chalk: "chalk",
         },
         exports: "named",
       },

@@ -6,8 +6,8 @@ import ora from "ora"
 import { PluginOptions } from "./types"
 import { deleteFolderRecursive, log } from "./utils"
 
-export default function vitePluginClean(options: PluginOptions): Plugin {
-  const { folder = "dist", hooks = {} } = options || {}
+export default function vitePluginClean(options: PluginOptions = {}): Plugin {
+  const { folder = "dist", hooks = {} } = options
   if (typeof folder !== "string" && !Array.isArray(folder)) {
     throw new Error(
       chalk.blue.bgRed.bold(
@@ -18,10 +18,11 @@ export default function vitePluginClean(options: PluginOptions): Plugin {
   const folders = typeof folder === "string" ? [folder] : folder
   let spinner = ora("Loading...")
   return {
-    name: "vite-plugin-clean",
+    name: "vite-plugin-cleaned",
+    enforce: "pre",
     async buildStart() {
       log(
-        chalk.blue("\n[vite:clean]"),
+        chalk.blue("\n[vite:cleaned]"),
         chalk.green(`Start cleaning: ${folders.join(", ")}`)
       )
       spinner = ora("Loading...").start()
@@ -30,7 +31,7 @@ export default function vitePluginClean(options: PluginOptions): Plugin {
         const folderPath = path.resolve(process.cwd(), folder)
         await deleteFolderRecursive(folderPath)
         log(
-          chalk.blue("\n[vite:clean]"),
+          chalk.blue("\n[vite:cleaned]"),
           chalk.green.bold(`Successfully deleted: ${folderPath}`)
         )
       }
