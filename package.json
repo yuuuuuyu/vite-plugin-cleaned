@@ -1,6 +1,6 @@
 {
     "name": "vite-plugin-cleaned",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "private": false,
     "description": "",
     "main": "./dist/vite-plugin-cleaned.umd.js",
