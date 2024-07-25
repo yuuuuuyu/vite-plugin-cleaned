@@ -30,9 +30,7 @@ export default function vitePluginClean(options: PluginOptions = {}): Plugin {
       try {
         for (const folder of folders) {
           const folderPath = path.resolve(process.cwd(), folder)
-          spinner.text = `Deleting ${folderPath}...`
           await deleteFolderRecursive(folderPath)
-
           spinner.succeed(`Deleted: ${folderPath}`)
           spinner.start()
         }
