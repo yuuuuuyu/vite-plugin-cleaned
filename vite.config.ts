@@ -6,12 +6,9 @@ import vitePluginClean from "./src/index"
 import { nodePolyfills } from "vite-plugin-node-polyfills"
 
 export default defineConfig({
-  //   optimizeDeps: {
-  //     include: ["fs-extra", "ora", "path"],
-  //   },
   plugins: [
     vitePluginClean({
-      folder: "dist",
+      folder: ["dist", "dist-types"],
     }),
     dts({
       entryRoot: "src",
