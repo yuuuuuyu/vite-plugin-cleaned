@@ -1,5 +1,5 @@
-import path from "path"
-import fs from "fs/promises"
+import path from "node:path"
+import fs from "fs-extra"
 
 export const log = console.log
 export async function deleteFolderRecursive(folderPath: string) {
