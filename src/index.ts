@@ -39,7 +39,7 @@ export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
 
         log(
           chalk.blue("[vite:cleaned]"),
-          chalk.green("Completed successfully!")
+          chalk.green("Completed successfully!\n")
         )
       } catch (error: any) {
         spinner.fail("Cleaning failed!") // 失败时更新 spinner 状态
