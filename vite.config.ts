@@ -1,13 +1,13 @@
 import { defineConfig } from "vite"
 import path from "path"
 import dts from "vite-plugin-dts"
-import vitePluginClean from "./src/index"
+import VitePluginCleaned from "./src/index"
 
 import { nodePolyfills } from "vite-plugin-node-polyfills"
 
 export default defineConfig({
   plugins: [
-    vitePluginClean({
+    VitePluginCleaned({
       folder: ["dist", "dist-types"],
     }),
     dts({
