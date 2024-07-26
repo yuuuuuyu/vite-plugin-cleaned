@@ -6,7 +6,7 @@ import ora from "ora"
 import { PluginOptions } from "./types"
 import { deleteFolderRecursive, log } from "./utils"
 
-export default function vitePluginClean(options: PluginOptions = {}): Plugin {
+export default function VitePluginClean(options: PluginOptions = {}): Plugin {
   const { folder = "dist", hooks = {} } = options
   if (typeof folder !== "string" && !Array.isArray(folder)) {
     throw new Error(
