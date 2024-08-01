@@ -1,10 +1,10 @@
 import { Plugin } from "vite"
 import path from "path"
+import fs from "fs-extra"
 import chalk from "chalk"
 import ora from "ora"
 
 import { PluginOptions } from "./types"
-import { deleteFolderRecursive, log } from "./utils"
 
 export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
   const { folder = "dist", hooks = {} } = options
@@ -22,7 +22,7 @@ export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
     name: "vite-plugin-cleaned",
     enforce: "pre",
     async buildStart() {
-      log(
+      console.log(
         chalk.blue("\n[vite:cleaned]"),
         chalk.green(`Start cleaning: [${folders}]`)
       )
@@ -30,21 +30,27 @@ export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
       try {
         for (const folder of folders) {
           const folderPath = path.resolve(process.cwd(), folder)
-          await deleteFolderRecursive(folderPath)
-          spinner.succeed(`Deleted: ${folderPath}`)
+          try {
+            await fs.removeSync(folderPath)
+            spinner.succeed(`Deleted: ${folderPath}`)
+          } catch (deleteError: any) {
+            spinner.fail(`Failed to delete: ${folderPath}`)
+            console.log(chalk.red(`Error: ${deleteError.message}`))
+          }
           spinner.start()
         }
         spinner.succeed(`Cleaned ${folders.length} folders!`)
         spinner.stop()
 
-        log(
+        console.log(
           chalk.blue("[vite:cleaned]"),
           chalk.green("Completed successfully!\n")
         )
       } catch (error: any) {
-        spinner.fail("Cleaning failed!") // 失败时更新 spinner 状态
-        log(chalk.red(`Error: ${error.message}`)) // 记录错误信息
+        spinner.fail("Cleaning failed!")
+        console.log(chalk.red(`Error: ${error.message}`))
       }
+
       if (hooks.buildStart) {
         await hooks.buildStart()
       }

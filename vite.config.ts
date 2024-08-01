@@ -12,7 +12,7 @@ export default defineConfig({
     }),
     dts({
       entryRoot: "src",
-      outputDir: "dist/types",
+      outputDir: "dist",
       tsConfigFilePath: "./tsconfig.json",
     }),
     nodePolyfills(),

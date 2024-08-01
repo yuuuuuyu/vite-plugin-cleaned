@@ -3,3 +3,5 @@ dist/
 pnpm-lock.yaml
 package-lock.json
 .DS_Store
+
+--registry=https://nexus.hive-df.com/repository/bt-npm-hosted/
