@@ -33,7 +33,7 @@ export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
           try {
             await fs.removeSync(folderPath)
             spinner.succeed(`Deleted: ${folderPath}`)
-          } catch (deleteError) {
+          } catch (deleteError: any) {
             spinner.fail(`Failed to delete: ${folderPath}`)
             console.log(chalk.red(`Error: ${deleteError.message}`))
           }
