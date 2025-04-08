@@ -8,7 +8,7 @@ import { nodePolyfills } from "vite-plugin-node-polyfills"
 export default defineConfig({
   plugins: [
     VitePluginCleaned({
-      folder: ["dist", "dist-types"],
+      folder: ["dist"],
     }),
     dts({
       entryRoot: "src",
