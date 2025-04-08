@@ -15,6 +15,7 @@ export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
       )
     )
   }
+
   const folders = typeof folder === "string" ? [folder] : folder
   let spinner = ora()
 
@@ -30,15 +31,18 @@ export default function VitePluginCleaned(options: PluginOptions = {}): Plugin {
       try {
         for (const folder of folders) {
           const folderPath = path.resolve(process.cwd(), folder)
+          spinner.start(`Deleting: ${folderPath}`)
+
           try {
-            await fs.removeSync(folderPath)
+            await fs.emptyDir(folderPath)
+            await fs.rmdir(folderPath)
             spinner.succeed(`Deleted: ${folderPath}`)
           } catch (deleteError: any) {
             spinner.fail(`Failed to delete: ${folderPath}`)
             console.log(chalk.red(`Error: ${deleteError.message}`))
           }
-          spinner.start()
         }
+
         spinner.succeed(`Cleaned ${folders.length} folders!`)
         spinner.stop()
 
