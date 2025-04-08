@@ -15,7 +15,8 @@
         }
     },
     "scripts": {
-        "build": "vite build"
+        "build": "vite build",
+        "release": "pnpm version patch && pnpm publish"
     },
     "files": [
         "dist",
