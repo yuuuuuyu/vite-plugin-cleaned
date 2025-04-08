@@ -3,17 +3,17 @@
 
 ## Install
 ```bash
-pnpm install vite-plugin-clean -D
+pnpm install vite-plugin-cleaned -D
 ```
 
 ## Usage
 ```js
 import { defineConfig } from 'vite'
-import vitePluginClean from 'vite-plugin-clean'
+import vitePluginCleaned from 'vite-plugin-cleaned'
 
 export default defineConfig({
   plugins: [
-    vitePluginClean()
+    vitePluginCleaned()
   ]
 })
 ```
@@ -35,7 +35,7 @@ export type PluginOptions = {
 ```js
 export default defineConfig({
   plugins: [
-    vitePluginClean({
+    vitePluginCleaned({
         folder: 'dist', // default: dist or ['dist'] or ['dist', 'lib']
         hooks: {
           buildStart() {
